@@ -2,7 +2,22 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
   </PropertyGroup>
+
+  <UsingTask TaskName="DemoCustomTask" AssemblyFile="..\Task\bin\Debug\net472\Task.dll" />
+
+  <ItemGroup>
+    <!-- Add a ProjectReference to ensure that the task gets built before it
+         needs to be called. -->
+    <ProjectReference Include="..\Task\Task.csproj"
+                      ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <Target Name="InvokeCustomTaskDemo"
+          BeforeTargets="CoreCompile"
+          DependsOnTargets="ResolveProjectReferences">
+    <DemoCustomTask />
+  </Target>
 
 </Project>
