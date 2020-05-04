@@ -35,4 +35,4 @@ You can also build a task assembly as a regular assembly in your solution. This 
 
 While `UsingTask` elements are considered before running tasks, the assembly file referenced in the `UsingTask` is not loaded until the first use of a task within it, so it's ok for the task assembly to not yet be built when the `UsingTask` is initially evaluated.
 
-If your task will be used in more than one project, define both the `UsingTask` and the `ProjectReference` in a `.targets` file and import it in the projects where you will use it.
+If your task will be used in more than one project, define the `UsingTask`, the `Target` that uses it, and the `ProjectReference` in a `.targets` file and import it in the projects where you will use it.

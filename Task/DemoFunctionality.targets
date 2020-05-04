@@ -1,0 +1,19 @@
+<Project>
+  <!-- Reference the output of the task project, using properties that expand
+       to match the real output. -->
+  <UsingTask TaskName="DemoCustomTask" AssemblyFile="$(MSBuildThisFileDirectory)\bin\$(Configuration)\net472\Task.dll" />
+
+  <ItemGroup>
+    <!-- Add a ProjectReference to ensure that the task gets built before it
+         needs to be called. -->
+    <ProjectReference Include="..\Task\Task.csproj"
+                      ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <Target Name="InvokeCustomTaskDemo"
+          BeforeTargets="CoreCompile"
+          DependsOnTargets="ResolveProjectReferences">
+    <DemoCustomTask />
+  </Target>
+
+</Project>
