@@ -1,7 +1,13 @@
 <Project>
   <!-- Reference the output of the task project, using properties that expand
        to match the real output. -->
-  <UsingTask TaskName="DemoCustomTask" AssemblyFile="$(MSBuildThisFileDirectory)\bin\$(Configuration)\net472\Task.dll" />
+  <!-- Using `TaskHostFactory` ensures that the task assembly will not be locked
+       at the end of the build. If it's omitted, that can cause build failures
+       in subsequent builds because the task assembly can't be written by the
+       next build. -->
+  <UsingTask TaskName="DemoCustomTask"
+             AssemblyFile="$(MSBuildThisFileDirectory)\bin\$(Configuration)\net472\Task.dll"
+             TaskFactory="TaskHostFactory" />
 
   <ItemGroup>
     <!-- Add a ProjectReference to ensure that the task gets built before it

@@ -36,3 +36,5 @@ You can also build a task assembly as a regular assembly in your solution. This 
 While `UsingTask` elements are considered before running tasks, the assembly file referenced in the `UsingTask` is not loaded until the first use of a task within it, so it's ok for the task assembly to not yet be built when the `UsingTask` is initially evaluated.
 
 If your task will be used in more than one project, define the `UsingTask`, the `Target` that uses it, and the `ProjectReference` in a `.targets` file and import it in the projects where you will use it.
+
+By default, MSBuild uses normal .NET Framework assembly load behavior, which causes the task assembly DLL to be loaded into an `MSBuild.exe` process that may be long-lived. That can cause failures in subsequent builds, because the task assembly can't be overwritten. Fortunately, MSBuild can be configured to [run a task in its own short-lived process](https://docs.microsoft.com/visualstudio/msbuild/how-to-configure-targets-and-tasks), and you should use that option for tasks built within the same solution.
