@@ -28,7 +28,7 @@ You can also build a task assembly as a regular assembly in your solution. This 
 
 1. Include a `UsingTask` element.
    1. Use properties to construct an `AssemblyFile` attribute that points to the output of the task project.
-   2. Specify `TaskFactory="TaskHostFactory"` to force MSBuild to load a new copy of the assembly in a new process for every execution of the task, allowing the task to be updated in the same build that uses it.
+   2. Specify `TaskFactory="TaskHostFactory"` to force MSBuild to load a new copy of the assembly in a new process for every build, allowing the task assembly to be updated after a build that uses it.
 2. Include a `ProjectReference` to ensure that the task assembly is built before it is used.
    1. Set `ReferenceOutputAssembly="false"` because the task assembly only needs to be built, not referenced by the calling project.
    2. TODO: multitargeting compatibility (`SetTargetFramework` conditional on `$(MSBuildRuntimeType)`?)
